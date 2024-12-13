@@ -41,9 +41,6 @@ if exist "%CREDENTIALS_FILE%" (
     echo !WIFI_USER! !PASSWORD!> "%CREDENTIALS_FILE%"
 )
 
-echo Username: !WIFI_USER!
-echo Password: !PASSWORD!
-
 :: HTTP API call
 
 curl POST ^
@@ -56,10 +53,15 @@ curl POST ^
   --location
 
 
-
+echo.
+echo.
+echo.
+echo -----------------------------------------------------------------
 if %errorlevel% neq 0 (
     echo Login failed.
+    echo -----------------------------------------------------------------
     exit /b 1
 )
 echo Login successful.
+echo -----------------------------------------------------------------
 exit /b 0
