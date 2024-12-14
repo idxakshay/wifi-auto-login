@@ -17,6 +17,16 @@ This script automates the WiFi login process for 91springboard network users on 
 - **Important**: Save it in an easily accessible location (e.g., Desktop or Documents)
 </details>
 
+<summary><strong>⚠️ If you see "Windows protected your PC" message</strong></summary>
+
+When you try to run the script, Windows SmartScreen might show a security warning. This is normal for downloaded scripts. To run the file:
+
+1. Click "**More info**" in the warning dialog
+2. Click "**Run anyway**" to execute the script
+3. If prompted by User Account Control (UAC), click "**Yes**" to allow the script to run
+
+> **Note**: This warning appears because the script is downloaded from the internet. The script is safe to run and you can verify its contents as it's open source.
+
 ### 2. First-Time Setup
 
 1. Double-click the `wifi-login.bat` script to run it
