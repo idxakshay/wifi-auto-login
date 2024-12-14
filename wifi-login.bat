@@ -76,15 +76,10 @@ if %FIRST_TIME_LOGIN% equ 1 (
     echo Requesting administrative privileges...
     powershell -Command "Start-Process '%~f0' -Verb RunAs"
     exit /b
-
-    @REM schtasks /Create /SC ONLOGON /TN "WiFiAutoLogin" /TR "\"%~f0\"" /RL HIGHEST /F
-    @REM if %errorlevel% neq 0 (
-    @REM     echo Failed to create scheduled task.
-    @REM     exit /b 1
-    @REM )
-    @REM echo Successfully created scheduled task for immediate WiFi login.
 )
 
+
+:: Create a task when running as admin so that the script runs on logon
 net session >nul 2>&1
 if %errorlevel% equ 0 (
     :: Has admin rights, proceed with creating task
