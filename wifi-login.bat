@@ -25,10 +25,13 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 echo Successfully connected to %SSID%.
+echo Waiting for connection to stabilize...
+timeout /t 3 /nobreak
 goto :login
 
 :: Function to login to the portal
 :login
+set "FIRST_TIME_LOGIN=0"
 if exist "%CREDENTIALS_FILE%" (
 
     for /f "tokens=1,2" %%i in (%CREDENTIALS_FILE%) do (
@@ -39,6 +42,7 @@ if exist "%CREDENTIALS_FILE%" (
     set /p "WIFI_USER=Enter Username: "
     set /p "PASSWORD=Enter Password: "
     echo !WIFI_USER! !PASSWORD!> "%CREDENTIALS_FILE%"
+     set "FIRST_TIME_LOGIN=1"
 )
 
 :: HTTP API call
@@ -52,7 +56,6 @@ curl POST ^
   --verbose ^
   --location
 
-
 echo.
 echo.
 echo.
@@ -64,4 +67,33 @@ if %errorlevel% neq 0 (
 )
 echo Login successful.
 echo -----------------------------------------------------------------
+
+:: Create scheduled task if this is the first time login
+if %FIRST_TIME_LOGIN% equ 1 (
+
+    net session >nul 2>&1
+
+    echo Requesting administrative privileges...
+    powershell -Command "Start-Process '%~f0' -Verb RunAs"
+    exit /b
+
+    @REM schtasks /Create /SC ONLOGON /TN "WiFiAutoLogin" /TR "\"%~f0\"" /RL HIGHEST /F
+    @REM if %errorlevel% neq 0 (
+    @REM     echo Failed to create scheduled task.
+    @REM     exit /b 1
+    @REM )
+    @REM echo Successfully created scheduled task for immediate WiFi login.
+)
+
+net session >nul 2>&1
+if %errorlevel% equ 0 (
+    :: Has admin rights, proceed with creating task
+    schtasks /Create /SC ONLOGON /TN "WiFiAutoLogin" /TR "\"%~f0\"" /RL HIGHEST /F
+    if %errorlevel% neq 0 (
+        echo Failed to create scheduled task.
+        exit /b 1
+    )
+    echo Successfully created scheduled task for immediate WiFi login.
+)
+
 exit /b 0
