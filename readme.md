@@ -6,8 +6,16 @@ This script automates the WiFi login process for 91springboard network users on 
 
 ### 1. Download the Script
 
-- Download the `wifi-login.bat` script to your computer
-- Save it in a location you can easily access (e.g., Desktop or Documents)
+> **Quick Download Link:**
+> 📥 [**Click here to download wifi-login.bat**](https://github.com/idxakshay/wifi-auto-login/releases/download/first-release/wifi-login.bat)
+
+<details>
+<summary><strong>Download Instructions</strong></summary>
+
+- **Option 1**: Click the download link above
+- **Option 2**: Right-click and select "Save link as..."
+- **Important**: Save it in an easily accessible location (e.g., Desktop or Documents)
+</details>
 
 ### 2. First-Time Setup
 
