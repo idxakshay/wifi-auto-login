@@ -37,6 +37,12 @@ When you try to run the script, Windows SmartScreen might show a security warnin
    - Save your credentials securely
    - Request administrative privileges to set up auto-start
    - Create a scheduled task for automatic login
+4. Manually turn off the AC Power requirement for the Windows task scheduler
+   - Open Task scheduler
+   - Uder Task Scheduler library you will see 'WiFiAutoLogin'
+   - Double click on 'WiFiAutoLogin' and go the conditions tab
+   - Under Conditions tab, uncheck the checkbox for Power - 'Start the task only if the computer is on AC power'
+   - Click on Ok button
 
 ### 3. Automatic Login
 
