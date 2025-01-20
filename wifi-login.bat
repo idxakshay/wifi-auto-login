@@ -48,11 +48,11 @@ if exist "%CREDENTIALS_FILE%" (
 :: HTTP API call
 
 curl POST ^
-  "https://portal.91springboard.com/login" ^
+  --ssl-no-revoke "https://portal.91springboard.com/login" ^
   --data-urlencode "username=!WIFI_USER!" ^
   --data-urlencode "password=!PASSWORD!" ^
-  -H "Content-Type: application/x-www-form-urlencoded" ^
-  -H "Accept: text/html,application/xhtml+xml" ^
+  -H "Content-Type:application/x-www-form-urlencoded" ^
+  -H "Accept:text/html,application/xhtml+xml" ^
   --verbose ^
   --location
 
